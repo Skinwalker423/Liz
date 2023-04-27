@@ -1,0 +1,54 @@
+<div class="max-w-md">
+  <div class="text-5xl font-bold my-4 text-center">
+    {{ section.settings.title }}
+  </div>
+  <div class="my-4">
+    <p class="text-base md:text-xl leading-normal">
+      {{ section.settings.subtext }}
+    </p>
+  </div>
+  <div class="my-4 text-center">
+    {% if section.settings.button_url == blank %}
+      {% assign shop_url = shop.secure_url %}
+    {% else %}
+      {% assign shop_url = section.settings.button_url %}
+    {% endif %}
+    <a class="px-4 inline py-2 text-base font-medium shadow bg-green-600 hover:bg-green-800 text-white" href="{{  shop_url }}">{{ section.settings.redirect }}</a>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Template 404",
+    "tag": "section",
+    "class": "flex items-center justify-center py-7 h-screen",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "404 Title",
+        "default": "404",
+        "info": "Title of the 404 error message"
+      }, {
+        "type": "text",
+        "id": "subtext",
+        "label": "404 Subtext title",
+        "default": "The page you were looking for does not exist",
+        "info": "Subtext of the 404 error message"
+      }, {
+        "type": "text",
+        "id": "redirect",
+        "label": "Redirect title",
+        "default": "Back to homepage",
+        "info": "Title of where the link will redirect"
+      }, {
+        "type": "url",
+        "id": "button_url",
+        "label": "404 button URL",
+        "info": "url to redirect"
+
+      }
+    ]
+
+  }
+{% endschema %}
