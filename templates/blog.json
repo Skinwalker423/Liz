@@ -2,16 +2,7 @@
   "name": "Template Blog",
   "sections": {
     "template": {
-      "type": "template-blog",
-      "blocks": {
-        "title": {
-          "type": "blog_title"
-        },
-        "author": {
-          "type": "blog_author"
-        }
-      },
-      "block_order": ["title", "author"]
+      "type": "template-blog"
     }
   },
   "order": ["template"]

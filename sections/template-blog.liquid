@@ -1,5 +1,26 @@
-{% paginate blog.articles by 3 %}
-  {% for article in blog.articles %}{% endfor %}
+{% paginate blog.articles by {{ section.settings.number_of_blog_posts }} %}
+  {% for article in blog.articles %}
+    <div>
+      {% if article.image != blank %}
+        <img src="{{ article.image | img_url: 'medium' }}" alt="{{ article.image.alt }}">
+      {% else %}
+        {{ "image" | placeholder_svg_tag: "w-full" }}
+      {% endif %}
+      {% if section.settings.enable_description_preview == true %}
+        <h1>{{ article.title }}</h1>
+        {% if article.excerpt.size > 0 %}
+          <p>{{ article.excerpt }}</p>
+        {% else %}
+          <p>{{ article.content | strip_html | truncatewords: 15, '...' }}</p>
+
+          <button class="mt-5">
+            <a href="{{ article.url }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Read more</a>
+          </button>
+        {% endif %}
+      {% endif %}
+
+    </div>
+  {% endfor %}
   {% if paginate.pages > 1 %}
     {{ paginate | default_pagination }}
   {% endif %}
@@ -11,26 +32,26 @@
   {
     "name": "Template Blog",
     "tag": "section",
-    "class": "bg-red-400",
+    "class": "flex justify-center items-center",
     "settings": [
       {
-        "type": "text",
-        "id": "template-blog",
-        "label": "Blog Title",
-        "info": "Name of the title of the blog post"
+        "type": "range",
+        "id": "number_of_blog_posts",
+        "label": "Number of Blog Posts per Page",
+        "info": "Number of pages ",
+        "min": 1,
+        "max": 5,
+        "default": 3,
+        "step": 1
 
-      }
-    ],
-    "blocks": [
-      {
-        "type": "blog_title",
-        "name": "Title",
-        "limit": 1
       }, {
-        "type": "blog_author",
-        "name": "Author",
-        "limit": 1
+        "type": "checkbox",
+        "id": "enable_description_preview",
+        "label": "Enable Description Preview",
+        "default": true,
+        "info": "Check the box to make the description visible"
       }
     ]
+
   }
 {% endschema %}
