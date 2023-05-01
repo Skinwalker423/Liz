@@ -1,6 +1,6 @@
 <article
   itemscope
-  itemtype="https://schema.org/BlogPosting"
+  itemtype="http://schema.org/BlogPosting"
   class="py-8">
   {% for block in section.blocks %}
     {% case block.type %}
@@ -15,7 +15,7 @@
       {% when 'article_author' %}
       <div
         itemscope
-        itemtype="https://schema.org/Person"
+        itemtype="http://schema.org/Person"
         class="flex items-center justify-center">
         <div class="max-w-7xl text-center">
           {% if section.settings.enable_author == true %}
@@ -165,6 +165,34 @@
     {% endform %}
   </div>
 {% endif %}
+
+<script type="application/ld+json">
+  {
+  "@context": "http://schema.org",
+          "@type": "BlogPosting",
+          "headline": {{ article.title | json }},
+  "articleBody": {{ article.content | strip_html | json }},
+
+  {% if article.excerpt != blank %}
+    "description": {{ article.excerpt | strip_html | json }},
+  {% endif %}
+  {% if article.image %}
+    "image": [
+    {{ article.image | img_url: 'medium' | prepend: 'https:' | json }}
+    ],
+  {% endif %}
+  "datePublished": {{ article.published_at | date: format: 'default' | json }},
+  "dateCreated": {{ article.created_at | date: format: 'default' | json }},
+  "author": {
+            "@type": "Person",
+            "name": {{ article.author | json }}
+  },
+  "publisher": {
+            "@type": "Organization",
+            "name": {{ shop.name | json }}
+  }
+  }
+</script>
 
 {% schema %}
   {

@@ -1,0 +1,36 @@
+{% paginate blog.articles by 3 %}
+  {% for article in blog.articles %}{% endfor %}
+  {% if paginate.pages > 1 %}
+    {{ paginate | default_pagination }}
+  {% endif %}
+{% endpaginate %}
+
+
+
+{% schema %}
+  {
+    "name": "Template Blog",
+    "tag": "section",
+    "class": "bg-red-400",
+    "settings": [
+      {
+        "type": "text",
+        "id": "template-blog",
+        "label": "Blog Title",
+        "info": "Name of the title of the blog post"
+
+      }
+    ],
+    "blocks": [
+      {
+        "type": "blog_title",
+        "name": "Title",
+        "limit": 1
+      }, {
+        "type": "blog_author",
+        "name": "Author",
+        "limit": 1
+      }
+    ]
+  }
+{% endschema %}
