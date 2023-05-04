@@ -2,8 +2,21 @@
   "name": "Template Cart",
   "sections": {
     "template-cart": {
-      "type": "template-cart"
+      "type": "template-cart",
+      "blocks": {
+        "subtotal": {
+          "type": "subtotal"
+        },
+        "update": {
+          "type": "update_button"
+        },
+        "checkout": {
+          "type": "checkout_button"
+        }
+      },
+      "block_order": ["checkout", "subtotal", "update"]
     }
   },
+
   "order": ["template-cart"]
 }
