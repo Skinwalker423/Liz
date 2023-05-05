@@ -1,0 +1,44 @@
+{% paginate collection.products by {{ section.settings.pagination_quantity }} %}
+  {% for product in collection.products %}
+    {% if product != blank %}
+      <div class="border max-w-xl flex flex-col justify-center items-center">
+        {% if product.featured_image %}
+          <img
+            class="w-full object-cover"
+            src="{{ product.featured_image | img_url: 'medium' }}"
+            alt="{{ product.featured_image.alt }}">
+        {% else %}
+          {{ "image" | placeholder_svg_tag: "w-full h-80 object-cover bg-gray-100" }}
+
+        {% endif %}
+        <h1>{{ product.title }}</h1>
+        <span>Vendor: {{ product.vendor }}</span>
+        <p>{{ product.price | money_with_currency }}</p>
+        <a class="text-red-600" href="{{ product.url }}">See details</a>
+      </div>
+    {% else %}
+      <p>Sorry, no products available right now</p>
+    {% endif %}
+  {% endfor %}
+  <div class="max-w-6xl mx-auto">
+    {% render 'pagination', pagination: paginate %}
+  </div>
+{% endpaginate %}
+
+{% schema %}
+  {
+    "name": "Template Collection",
+    "settings": [
+      {
+        "type": "range",
+        "id": "pagination_quantity",
+        "label": "Pagination Quantity",
+        "info": "Choose the number of products to display per page",
+        "default": 6,
+        "max": 12,
+        "min": 3,
+        "step": 1
+      }
+    ]
+  }
+{% endschema %}
