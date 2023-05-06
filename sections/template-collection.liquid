@@ -1,30 +1,22 @@
-{% paginate collection.products by {{ section.settings.pagination_quantity }} %}
-  {% for product in collection.products %}
-    {% if product != blank %}
-      <div class="border max-w-xl flex flex-col justify-center items-center">
-        {% if product.featured_image %}
-          <img
-            class="w-full object-cover"
-            src="{{ product.featured_image | img_url: 'medium' }}"
-            alt="{{ product.featured_image.alt }}">
-        {% else %}
-          {{ "image" | placeholder_svg_tag: "w-full h-80 object-cover bg-gray-100" }}
-
-        {% endif %}
-        <h1>{{ product.title }}</h1>
-        <span>Vendor: {{ product.vendor }}</span>
-        <p>{{ product.price | money_with_currency }}</p>
-        <a class="text-red-600" href="{{ product.url }}">See details</a>
+<div class="px-4 py-8">
+  <h1 class="text-3xl text-center">{{ collection.title }}</h1>
+  {% paginate collection.products by section.settings.pagination_quantity %}
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {% for product in collection.products %}
+          {% if product != blank %}
+            {% render 'product-card', product_product: product %}
+          {% else %}
+            <p>Sorry, no products available right now</p>
+          {% endif %}
+        {% endfor %}
       </div>
-    {% else %}
-      <p>Sorry, no products available right now</p>
-    {% endif %}
-  {% endfor %}
-  <div class="max-w-6xl mx-auto">
-    {% render 'pagination', pagination: paginate %}
-  </div>
-{% endpaginate %}
-
+    </div>
+    <div class="max-w-6xl mx-auto">
+      {% render 'pagination', pagination: paginate %}
+    </div>
+  {% endpaginate %}
+</div>
 {% schema %}
   {
     "name": "Template Collection",
