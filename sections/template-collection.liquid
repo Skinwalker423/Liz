@@ -1,6 +1,6 @@
 <div class="px-4 py-8">
   <h1 class="text-3xl text-center">{{ collection.title }}</h1>
-  {% paginate collection.products by section.settings.pagination_quantity %}
+  {% paginate collection.products by section.settings.pagination_quantity_per_page %}
     <div class="max-w-6xl mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         {% for product in collection.products %}
@@ -23,13 +23,19 @@
     "settings": [
       {
         "type": "range",
-        "id": "pagination_quantity",
-        "label": "Pagination Quantity",
+        "id": "pagination_quantity_per_page",
+        "label": "Number of products per page",
         "info": "Choose the number of products to display per page",
         "default": 6,
         "max": 12,
         "min": 3,
         "step": 1
+      }, {
+        "type": "checkbox",
+        "id": "display_vendor",
+        "label": "Display Vendor name",
+        "info": "check box to include the vendor name in the product card",
+        "default": true
       }
     ]
   }
