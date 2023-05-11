@@ -1,0 +1,46 @@
+<div class="flex flex-col items-center my-8">
+  {% form 'contact' %}
+    <label for="contact_name">Name</label>
+    <input
+      id="contact_name"
+      required
+      type="text"
+      name="contact[name]">
+    <label for="contact_email">Email</label>
+    <input
+      id="contact_email"
+      required
+      type="email"
+      name="contact[email]">
+    <div class="px-3 md:w-full">
+      <label for="contact_message">Message</label>
+      <textarea
+        class="w-full text-gray-700 border py-2 px-3 h-20 focus:border-red-500"
+        id="contact_message"
+        name="contact[body]"
+        required
+        placeholder="Details on contact info"
+        rows="10"></textarea>
+    </div>
+    <div class="px-1 md:flex mb-3">
+      <div class="md:w-full px-3">
+        <input
+          type="submit"
+          class="w-full cursor-pointer px-4 py-2 border text-base font-medium text-white bg-gray-900 hover:bg-gray-500"
+          value="Submit">
+      </div>
+    </div>
+  {% endform %}
+</div>
+
+
+{% schema %}
+  {
+    "name": "Contact Form",
+    "presets": [
+      {
+        "name": "Contact Form"
+      }
+    ]
+  }
+{% endschema %}

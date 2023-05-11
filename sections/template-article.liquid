@@ -6,17 +6,17 @@
     {% case block.type %}
       {% when 'article_title' %}
       <div class="flex
-                    items-center
-                    justify-center">
+                                        items-center
+                                        justify-center">
         <div class="max-w-7xl
-                        text-center">
+                                                text-center">
           <a href="{{
-                        blog.url
-                        }}"class="text-base
-                        uppercase
-                        text-gray-500
-                        hover:text-gray-900
-                        font-bold">{{ blog.title }}</a>
+                                                blog.url
+                                                }}"class="text-base
+                                                uppercase
+                                                text-gray-500
+                                                hover:text-gray-900
+                                                font-bold">{{ blog.title }}</a>
           <h1 itemprop="headline" class="text-4xl md:text-6xl font-medium">{{ article.title }}</h1>
         </div>
       </div>
@@ -27,7 +27,7 @@
         itemtype="http://schema.org/Person"
         class="flex items-center justify-center">
         <div class="max-w-7xl
-                        text-center">
+                                                text-center">
           {% if section.settings.enable_author == true %}
             <small itemprop="author">{{ article.author }}</small>
           {% endif %}
@@ -36,10 +36,10 @@
 
       {% when 'article_published_date' %}
       <div class="flex
-                    items-center
-                    justify-center">
+                                        items-center
+                                        justify-center">
         <div class="max-w-7xl
-                        text-center">
+                                                text-center">
           {% if section.settings.enable_published_date == true %}
             <time itemprop="datePublished" datetime="{{ article.published_at | date: '%Y-%m-%d'  }}">{{ article.published_at | date: format: 'on_date' }}</time>
           {% endif %}
@@ -61,8 +61,8 @@
       {% when 'article_content' %}
       <div itemprop="articleBody" class="flex items-center justify-center">
         <div class="max-w-4xl
-                        md:px-0
-                        px-5">
+                                                md:px-0
+                                                px-5">
           {{ article.content }}
         </div>
       </div>
@@ -79,39 +79,39 @@
   <div id="comments" class="my-8">
     {% if article.comments_count > 0 %}
       <div class="flex-1
-                    items-centered
-                    justify-center
-                    mx-auto
-                    max-w-4xl
-                    px-4">
+                                        items-centered
+                                        justify-center
+                                        mx-auto
+                                        max-w-4xl
+                                        px-4">
         <h1 class="text-lg
-                        mb-4
-                        font-medium">
+                                                mb-4
+                                                font-medium">
           See
           what
-                    users
-                    are
-                    saying
+                                        users
+                                        are
+                                        saying
         </h1>
         {% paginate article.comments by 3 %}
 
           {% for post in article.comments %}
             <div class="flex-1
-                                border
-                                my-4
-                                px-4
-                                py-2
-                                sm:px-6
-                                sm:py-4
-                                leading-relaxed">
+                                                                border
+                                                                my-4
+                                                                px-4
+                                                                py-2
+                                                                sm:px-6
+                                                                sm:py-4
+                                                                leading-relaxed">
               <span class="comment-author">{{ post.author }}</span>
               <span class="text-xs
-                                text-gray-400">{{ post.created_at | date: format: 'on_date' }}</span>
+                                                                text-gray-400">{{ post.created_at | date: format: 'on_date' }}</span>
               <p class="text-sm">{{ post.content }}</p>
             </div>
           {% endfor %}
           <div class="max-w-6xl
-                            mx-auto">
+                                                        mx-auto">
             {% render 'pagination', pagination: paginate %}
           </div>
         {% endpaginate %}
@@ -129,40 +129,40 @@
   <div id="comment_form" class="my-8">
     {% form 'new_comment', article %}
       <div class="flex-1
-                    mx-auto
-                    items-center
-                    justify-center
-                    max-w-4xl
-                    px-4">
+                                        mx-auto
+                                        items-center
+                                        justify-center
+                                        max-w-4xl
+                                        px-4">
         {% if form.errors %}
           <div class="border
-                            bg-red-100
-                            border-red-800
-                            p-5">
+                                                        bg-red-100
+                                                        border-red-800
+                                                        p-5">
             <div class="flex
-                                flex-row
-                                items-center
-                                w-full
-                                my-3">
+                                                                flex-row
+                                                                items-center
+                                                                w-full
+                                                                my-3">
               <div class="text-red-500">
                 {% render 'icon-failed' %}
               </div>
               <div class="text-sm
-                                    font-medium
-                                    ml-3">
+                                                                        font-medium
+                                                                        ml-3">
                 Oh
                 no!
-                                Your
-                                comment
-                                was
-                                not
-                                posted
+                                                                Your
+                                                                comment
+                                                                was
+                                                                not
+                                                                posted
               </div>
             </div>
             <ul class="px-4
-                                mb-3
-                                ml-7
-                                list-decimal">
+                                                                mb-3
+                                                                ml-7
+                                                                list-decimal">
               {% for error in form.errors %}
                 <li>
                   <span>{{ form.errors.messages[error] }}</span>
@@ -172,32 +172,32 @@
           </div>
         {% elsif form.posted_successfully? %}
           <div class="flex
-                            border
-                            bg-green-100
-                            border-green-800
-                            flex-row
-                            items-center
-                            w-full
-                            my-3
-                            p-5">
+                                                        border
+                                                        bg-green-100
+                                                        border-green-800
+                                                        flex-row
+                                                        items-center
+                                                        w-full
+                                                        my-3
+                                                        p-5">
             <div class="text-green-500">
               {% render 'icon-success' %}
             </div>
             <div class="text-sm
-                              font-medium
-                              ml-3">
+                                                              font-medium
+                                                              ml-3">
               Comment
               is
-                          posted
-                          successfully</div>
+                                                      posted
+                                                      successfully</div>
           </div>
         {% endif %}
 
         <div class="px-1
-                        md:flex
-                        mb-3">
+                                                md:flex
+                                                mb-3">
           <div class="px-3
-                            md:w-1/2">
+                                                        md:w-1/2">
             <label class="text-gray-700 font-medium uppercase text-xs mb-2" for="comment_author">
               Name</label>
             <input
@@ -209,7 +209,7 @@
               required>
           </div>
           <div class="px-3
-                            md:w-1/2">
+                                                        md:w-1/2">
             <label class="text-gray-700 font-medium uppercase text-xs mb-2" for="comment_email">
               Email</label>
             <input
@@ -222,10 +222,10 @@
           </div>
         </div>
         <div class="px-1
-                        md:flex
-                        mb-3">
+                                                md:flex
+                                                mb-3">
           <div class="px-3
-                            md:w-full">
+                                                        md:w-full">
             <label class="text-gray-700 font-medium resize-none uppercase text-xs mb-2" for="comment_content">
               Comment</label>
             <textarea
@@ -237,10 +237,10 @@
           </div>
         </div>
         <div class="px-1
-                        md:flex
-                        mb-3">
+                                                md:flex
+                                                mb-3">
           <div class="md:w-full
-                            px-3">
+                                                        px-3">
             <input
               type="submit"
               class="w-full cursor-pointer px-4 py-2 border text-base font-medium text-white bg-gray-900 hover:bg-gray-500"
@@ -255,10 +255,10 @@
 <script type="application/ld+json">
   {
   "@context":
-    "http://schema.org",
-    "@type":
-    "BlogPosting",
-    "headline":{{ article.title | json }}
+        "http://schema.org",
+        "@type":
+        "BlogPosting",
+        "headline":{{ article.title | json }}
   ,
   "articleBody":{{ article.content | strip_html | json }}
   ,
@@ -280,16 +280,16 @@
   "dateCreated":{{ article.created_at | date: format: 'default' | json }}
   ,
   "author":
-    {
-    "@type":
-    "Person",
-    "name":{{ article.author | json }}
+        {
+        "@type":
+        "Person",
+        "name":{{ article.author | json }}
   },
   "publisher":
-    {
-    "@type":
-    "Organization",
-    "name":{{ shop.name | json }}
+        {
+        "@type":
+        "Organization",
+        "name":{{ shop.name | json }}
   }
   }</script>
 

@@ -2,7 +2,10 @@
   "name": "Template Page",
   "sections": {
     "template-page": {
-      "type": "template-page"
+      "type": "template-page",
+      "settings": {
+        "contact-form": "all"
+      }
     }
   },
   "order": ["template-page"]
