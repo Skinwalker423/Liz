@@ -1,3 +1,21 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<style>
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    font-size: 20px;
+  }
+  .swiper-pagination-bullet {
+    background-color: red;
+
+  }
+  .swiper-pagination-bullet-active {
+
+    background-color: red;
+  }
+</style>
+
 <div class="max-w-6xl mx-auto my-8">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
     <div class="product--medias">
@@ -8,7 +26,48 @@
           </div>
         {% endfor %}
       </div>
+      <div class="md:hidden">
+        <div class="swiper h-94">
+          <div class="swiper-wrapper">
+            {% for media in product.media %}
+              <div class="swiper-slide">
+                <div class="h-80 overflow-hidden p-2">
+                  {% render 'product-media', media: media %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="swiper-pagination"></div>
+          <div style="color: red;height: 20px;top:auto !important" class="swiper-button-prev"></div>
+          <div style="color: red;height: 20px;top:auto !important" class="swiper-button-next"></div>
+        </div>
+      </div>
     </div>
     <div class="product--information"></div>
   </div>
 </div>
+
+<script>
+  const swiper = new Swiper('.swiper', {
+
+    // Optional parameters
+    direction: 'horizontal',
+    loop: true,
+
+// If we need pagination
+    pagination: {
+      el: '.swiper-pagination'
+    },
+
+// Navigation arrows
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    },
+
+// And if we need scrollbar
+    scrollbar: {
+      el: '.swiper-scrollbar'
+    }
+  });
+</script>
