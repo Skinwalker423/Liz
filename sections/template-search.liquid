@@ -1,16 +1,36 @@
-{% paginate search.results by section.settings.results_per_page %}
-  <div class="max-w-6xl grid grid-cols-3 mx-auto py-3">
-    {% for product in search.results %}
+<div class="container mx-auto">
+  {% paginate search.results by section.settings.results_per_page %}
+    <h1 class="text-xl my-4 text-center">Search Results</h1>
+    <div class="flex justify-center items-center">
 
-      {% render 'product-card', product_product: product %}
+      <form class="border flex rounded-md action="{{ routes.search_url }}" method="get">
+        <input
+          class="px-4 py-2 border-none w-80"
+          type="text"
+          name="q"
+          placeholder="Search store"
+          value="{{ search.terms |escape }}">
+        <button class="bg-gray-900 hover:bg-gray-700 text-white border px-4" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="max-w-6xl grid grid-cols-3 mx-auto py-3">
+      {% for item in search.results %}
+        {% case item.object_type %}
+          {% when "product" %}
+          {% render 'product-card', product_product: item %}
+      {% else %}
 
-    {% endfor %}
-  </div>
-  <div class="max-w-6xl mx-auto mb-5 flex justify-center">
-    {% render 'pagination', pagination: paginate %}
-  </div>
-{% endpaginate %}
+        {% endcase %}
 
+
+
+      {% endfor %}
+    </div>
+    <div class="max-w-6xl mx-auto mb-5 flex justify-center">
+      {% render 'pagination', pagination: paginate %}
+    </div>
+  {% endpaginate %}
+</div>
 {% schema %}
   {
     "settings": [
