@@ -1,0 +1,29 @@
+{% paginate search.results by section.settings.results_per_page %}
+  <div class="max-w-6xl grid grid-cols-3 mx-auto py-3">
+    {% for product in search.results %}
+
+      {% render 'product-card', product_product: product %}
+
+    {% endfor %}
+  </div>
+  <div class="max-w-6xl mx-auto mb-5 flex justify-center">
+    {% render 'pagination', pagination: paginate %}
+  </div>
+{% endpaginate %}
+
+{% schema %}
+  {
+    "settings": [
+      {
+        "type": "range",
+        "id": "results_per_page",
+        "default": 6,
+        "min": 4,
+        "max": 12,
+        "step": 1,
+        "label": "Pagination results per page"
+
+      }
+    ]
+  }
+{% endschema %}
