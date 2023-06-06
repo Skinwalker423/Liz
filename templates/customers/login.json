@@ -1,9 +1,9 @@
 {
-  "name": "Template Login",
+  "name": "Template Customer Login",
   "sections": {
-    "template-login": {
-      "type": "template-login"
+    "template-customer-login": {
+      "type": "template-customer-login"
     }
   },
-  "order": ["template-login"]
+  "order": ["template-customer-login"]
 }
