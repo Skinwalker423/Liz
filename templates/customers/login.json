@@ -1,0 +1,9 @@
+{
+  "name": "Template Login",
+  "sections": {
+    "template-login": {
+      "type": "template-login"
+    }
+  },
+  "order": ["template-login"]
+}
