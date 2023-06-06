@@ -13,19 +13,23 @@
         <button class="bg-gray-900 hover:bg-gray-700 text-white border px-4" type="submit">Search</button>
       </form>
     </div>
-    <div class="max-w-6xl grid grid-cols-3 mx-auto py-3">
-      {% for item in search.results %}
-        {% case item.object_type %}
-          {% when "product" %}
-          {% render 'product-card', product_product: item %}
+    {% if search.performed == true %}
+      {% if search.results.size > 0 %}
+        <div class="max-w-6xl grid grid-cols-3 mx-auto py-3">
+          {% for item in search.results %}
+            {% case item.object_type %}
+              {% when "product" %}
+              {% render 'product-card', product_product: item %}
+            {% endcase %}
+          {% endfor %}
+        </div>
       {% else %}
+        <div class="flex justify-center items-center w-full h-96 my-4">
+          <p>No results found for search term: {{ search.terms }}</p>
+        </div>
+      {% endif %}
+    {% endif %}
 
-        {% endcase %}
-
-
-
-      {% endfor %}
-    </div>
     <div class="max-w-6xl mx-auto mb-5 flex justify-center">
       {% render 'pagination', pagination: paginate %}
     </div>
