@@ -1,5 +1,5 @@
-<div class="h-full flex items-center justify-center py-12 px-6 md:px-4 lg:px-8">
-  <div class="max-w-md w-full space-y-8">
+<div x-data="{ recoverFormShow: false, loginForm: true }" class="h-full flex items-center justify-center py-12 px-6 md:px-4 lg:px-8">
+  <div x-show="loginForm" class="max-w-md w-full space-y-8">
     <div>
       <h1 class="text-center text-3xl font-bold mt-6">Sign in to your accrount</h1>
     </div>
@@ -37,8 +37,38 @@
 
         {% endif %}
         <button class="relative bg-blue-500 w-full px-3 py-4 text-sm font-medium text-white hover:bg-blue-700 mt-5" type="submit">Sign In</button>
+        <button x-on:click="recoverFormShow = true, loginForm = false" type="button" class="border-none text-blue-400 pt-3 text-center hover:text-blue-700" >Forgot your password?</button>
       {% endform %}
     </div>
   </div>
-  <div class="max-w-md w-full space-y-8"></div>
+  <div x-show="recoverFormShow" class="max-w-md w-full space-y-8">
+    <div>
+      <h1 class="text-center text-3xl font-bold mt-6">Recover your password</h1>
+    </div>
+    <div class="mt-8 border border-slate-200 p-5 shadow-md">
+      {% form 'recover_customer_password' %}
+        {% if form.errors %}
+          <div class="relative border border-red-400 bg-red-100 text-red-700 px-4 py-3" role="alert">
+            <strong class="font-bold">Error</strong>
+            <p class="block sm:inline">{{ form.errors | default_errors }}</p>
+          </div>
+        {% endif %}
+        <div class="my-2">
+          <label for="email" class="sr-only">Email Adress</label>
+          <input
+            class="w-full relative block py-3 px-2 border"
+            required
+            id="email"
+            placeholder="Email Address"
+            name="email"
+            autocomplete="email"
+            type="email">
+        </div>
+        
+        <button class="relative bg-blue-500 w-full px-3 py-4 text-sm font-medium text-white hover:bg-blue-700 mt-5" type="submit">Recover Password</button>
+        <button x-on:click="recoverFormShow = false, loginForm = true" type="button" class="border-none text-blue-400 pt-3 text-center hover:text-blue-700" >Back to login</button>
+      {% endform %}
+    </div>
+  </div>
+  </div>
 </div>
