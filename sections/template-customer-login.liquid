@@ -40,7 +40,7 @@
         <button x-on:click="recoverFormShow = true, loginForm = false" type="button" class="border-none text-blue-400 pt-3 text-center hover:text-blue-700" >Forgot your password?</button>
       {% endform %}
     </div>
-    {% if shop.customer_accounts_optional %}
+    {% if shop.checkout.guest_login %}
     <div class="flex justify-center items-center" >
     <hr class="w-full">
     <div class="mx-2">Or</div>
