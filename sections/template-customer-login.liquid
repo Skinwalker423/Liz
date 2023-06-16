@@ -40,6 +40,22 @@
         <button x-on:click="recoverFormShow = true, loginForm = false" type="button" class="border-none text-blue-400 pt-3 text-center hover:text-blue-700" >Forgot your password?</button>
       {% endform %}
     </div>
+    {% if shop.customer_accounts_optional %}
+    <div class="flex justify-center items-center" >
+    <div class=" w-full h-px bg-gray-700 divide-y" ></div>
+    <div class="mx-2">Or</div>
+    <div class=" w-full h-px bg-gray-700 divide-y" ></div>
+    </div>
+    <div class="mt-8 border border-slate-200 p-5 shadow-md">
+      <div>
+      <h1 class="text-center text-3xl font-bold mt-6">Continue as Guest</h1>
+    </div>
+      {% form 'guest_login' %}
+        <button class="relative bg-gray-700 w-full px-3 py-4 text-sm font-medium text-white hover:bg-gray-500 mt-5" type="submit">Continue</button>
+      {% endform %}
+    </div>
+    {% endif %}
+
   </div>
   <div x-show="recoverFormShow" class="max-w-md w-full space-y-8">
     <div>
