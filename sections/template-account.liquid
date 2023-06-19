@@ -9,7 +9,7 @@
           Order History
         </h2>
         <div>
-          {% paginate customer.orders by 12 %}
+          {% paginate customer.orders by section.settings.number_of_orders_displayed %}
             {% for order in customer.orders %}
               <div class="border max-w-lg">
                 <h3>{{ order.subtotal_price | money }}</h3>
@@ -19,11 +19,28 @@
         </div>
 
       </div>
-      <div class="h-full bg-red-500 w-1"></div>
-      <div class="w-full">
-        <h2>Details</h2>
+
+      <div class="w-full my-6 md:my-12">
+        <h2 class="text-xl font-bold text-gray-700">Details</h2>
       </div>
 
     {% endif %}
   </div>
 </div>
+
+{% schema %}
+  {
+    "settings": [
+      {
+        "type": "range",
+        "default": 6,
+        "id": "number_of_orders_displayed",
+        "label": "Orders displayed",
+        "min": 6,
+        "max": 12,
+        "step": 1,
+        "info": "Adjust the number of order displayed per pagination page"
+      }
+    ]
+  }
+{% endschema %}
