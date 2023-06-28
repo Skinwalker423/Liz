@@ -85,10 +85,27 @@
     <div>
       <h1 class="font-medium mb-4">Payment Information</h1>
       {% for transaction in order.transactions %}
+        {% assign credit_card_company = transaction.payment_details.credit_card_company %}
+        {% assign credit_card_number = transaction.payment_details.credit_card_number %}
+        {% if credit_card_company %}
+          <p>{{ credit_card_company }}</p>
+          <p>{{ credit_card_number }}</p>
+
+          {% case transaction.status_label %}
+            {% when 'Failure' %}
+            {% assign background = 'red' %}
+          {% else %}
+            {% assign background = 'green' %}
+          {% endcase %}
+
+          <span class="bg-{{ background }}-700 rounded-full text-sm px-4 py-1 text-white">{{ transaction.status_label }}</span>
+        {% else %}
+          <p>This ordered is manually placed by {{ shop.name }}</p>
+        {% endif %}
         {{ transaction.name }}
         {{ transaction.amount | money }}
         {{ transaction.created_at | date: format: 'date' }}
-        {{ transaction.status }}
+        {{ transaction.status_label }}
       {% endfor %}
     </div>
     <div></div>
