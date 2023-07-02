@@ -1,9 +1,16 @@
-<div class="w-full py-6 px-3">
-  <div class="border bg-white shadow-lg rounded-lg overflow-hidden">
-    <a href="{{ product_product.url }}">
+<div
+  class="w-full py-6 px-3">
+  <div
+    class="border bg-white shadow-lg rounded-lg overflow-hidden">
+    <a
+      href="{{ product_product.url }}">
       {% if product_product.featured_image %}
-        <div class="h-80 overflow-hidden">
+        <div
+          class="h-80 overflow-hidden">
           <img
+            width="500"
+            height="500"
+            loading="eager"
             class="w-full h-80 object-cover hover:scale-110 transition-transform"
             src="{{ product_product.featured_image | img_url: 'medium' }}"
             alt="{{ product_product.featured_image.alt }}">
@@ -13,13 +20,17 @@
 
       {% endif %}
     </a>
-    <div class="flex flex-col p-4">
+    <div
+      class="flex flex-col p-4">
       {% if section.settings.display_vendor == true %}
-        <span class="text-gray-400 text-sm">Vendor: {{ product_product.vendor }}</span>
+        <span
+          class="text-gray-400 text-sm">Vendor: {{ product_product.vendor }}</span>
       {% endif %}
       <h1>{{ product_product.title }}</h1>
       <p>{{ product_product.price | money_with_currency }}</p>
-      <a class="text-red-600" href="{{ product_product.url }}">See details</a>
+      <a
+        class="text-red-600"
+        href="{{ product_product.url }}">See details</a>
     </div>
   </div>
 </div>
